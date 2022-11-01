@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+<center>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">User Details</span>
+    </div>
+  </nav>
+  <hr style = "color: black; height: 1px; opacity: 100%"/>
+  <tr>
+    <td><%= link_to "Edit this template", edit_template_path(@template), class: "btn rounded-pill btn-outline-primary", for:"btnradio1"%></td>
+    <td><%= link_to "Back to templates", templates_path, class: "btn rounded-pill btn-outline-primary", for:"btnradio1"%></td>
+    <td><%= link_to "Use Template", template_add_template_path(@template), class: "btn rounded-pill btn-outline-primary", for:"btnradio1" %></td>
+  </tr>
+  <hr style = "color: black; height: 1px; opacity: 100%;"/>
+</center>
+<center>
+  <%= render @template %>
+  <div>
+    <%= button_to "Destroy this template", @template, method: :delete, class: "btn rounded-pill btn-outline-primary", for:"btnradio1" %>
+  </div>
+</center>

@@ -1,0 +1,7 @@
+<%= form.label :Email %></br>
+<%= form.select :emails, [], {}, {class: 'select2', multiple: "multiple", style: "width: 50%" } %></br>
+<%= form.label :Subject %></br>
+<%= form.text_field :subject, { style: "width: 50%"}%></br>
+<%= form.label :Body %></br>
+<%= form.rich_text_area :body %></br>
+<%= form.submit "Send Mail" %>

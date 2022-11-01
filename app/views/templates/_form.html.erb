@@ -1,0 +1,32 @@
+<%= form_with(model: template) do |form| %>
+  <% if template.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(template.errors.count, "error") %> prohibited this template from being saved:</h2>
+
+      <ul>
+        <% template.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-group">
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"> Subject: </span>
+      <%= form.text_field :subject, class: "form-control", placeholder: :subject %>
+    </div>
+    <div class="input-group">
+      <span class="input-group-text"> Body: </span>
+      <%= form.text_area :body, class: "form-control", placeholder: :body %>
+    </div>
+  </div>
+  <div>
+    </br>
+    <% if @template.id.present? %>
+      <%= form.submit "Update", class: "btn rounded-pill btn-outline-info" %>
+    <% else %>
+      <%= form.submit "Create", class: "btn rounded-pill btn-outline-info" %>
+    <% end %>
+  </div>
+<% end %>

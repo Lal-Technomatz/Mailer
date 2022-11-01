@@ -1,0 +1,23 @@
+<div class = "container-fluid" style = "width: 100%">
+  <% if @template.present? %>
+    <%= form_with url: template_add_template_path(@template) do |form| %>
+      <%= form.label :Email %></br>
+      <%= form.select :emails, [], {}, {class: 'select2', multiple: "multiple", style: "width: 50%" } %></br>
+      <%= form.label :Subject %></br>
+      <%= form.text_field :subject, value: @template.subject %></br>
+      <%= form.label :Body %></br>
+      <%= form.rich_text_area :body, value: @template.body %></br>
+      <%= form.submit "Send Mail", class: "btn btn-primary btn-lg" %>
+    <% end %>
+  <% else %>
+    <%= form_with model: user_temp do |form| %>
+      <%= form.label :Email %></br>
+      <%= form.select :emails, [], {}, {class: 'select2', multiple: "multiple", style: "width: 50%" } %></br>
+      <%= form.label :Subject %></br>
+      <%= form.text_field :subject, { style: "width: 50%"}%></br>
+      <%= form.label :Body %></br>
+      <%= form.rich_text_area :body %></br>
+      <%= form.submit "Send Mail", class: "btn btn-primary btn-lg" %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+<center>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">Users</span>
+      <span class="navbar-brand mb-0 h1">Download</span>
+      <%= link_to "CSV", users_path(format: :csv), class: "btn btn-primary btn-lg" %>
+      <%= link_to "Excel", users_path(format: :xls), class: "btn btn-primary btn-lg" %>
+      <span class="navbar-brand mb-0 h1">Import Users</span>
+      <%= form_with model: @user, url: import_users_path, multipart: true do |f| %>
+        <%= f.file_field :file, class: "btn btn-primary btn-lg" %>
+        <%= f.submit "Import", class: "btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
+  </nav>
+  <hr style = "color: black; height: 1px; opacity: 100%"/>
+  <tr>
+    <td><%= link_to "New user", new_user_path, class: "btn rounded-pill btn-outline-primary", for:"btnradio1"%></td>
+    <td><%= link_to "send Email", send_multiple_mail_users_path, class: "btn rounded-pill btn-outline-primary", for:"btnradio1"%></td>
+    <td><%= link_to "Templates", templates_path, class: "btn rounded-pill btn-outline-primary", for:"btnradio1"%></td>
+  </tr>
+  <hr style = "color: black; height: 1px; opacity: 100%;"/>
+  <table class="table">
+    <thead >
+      <tr>
+        <th scope="col" class="col col-lg-2">Id:</th>
+        <th scope="col" class="col-md-auto">Name:</th>
+        <th scope="col" colspan='2'  class="col col-lg-4">Action:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td class="col col-lg-2"><%= user.id%></td>
+          <td class="col-md-auto"><%= user.name%></td>
+          <td class="col col-lg-2"><%= button_to "Destroy this user", @user, method: :delete, class: "btn rounded-pill btn-outline-primary"%></td>
+          <td class="col col-lg-2"><%= link_to "Show this user", user, class: "btn rounded-pill btn-outline-success" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</center>

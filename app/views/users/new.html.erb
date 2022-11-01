@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+<center>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">New User</span>
+    </div>
+  </nav>
+  <hr style = "color: black; height: 1px; opacity: 100%"/>
+  <tr>
+    <td><%= link_to "Back to users", users_path, class: "btn rounded-pill btn-outline-primary", for:"btnradio1"%></td>
+  </tr>
+  <hr style = "color: black; height: 1px; opacity: 100%;"/>
+</center>
+<center>
+  <%= render "form", user: @user %>
+  <br>
+</center>
