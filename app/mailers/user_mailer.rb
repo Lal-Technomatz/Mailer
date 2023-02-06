@@ -6,10 +6,11 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "You got Successfully Registration!")
   end
 
-  def send_bulk_email(email, subject, data)
-    @user = email
+  def send_bulk_email(email, name, subject, data)
+    @user = email.strip
     @subject = subject
-    @body=data
+    name = name&.strip.present? ? " #{name.presence}" : ''
+    @body = data.gsub(' {name}', name)
     mail(to: @user, subject: @subject, messages: @body)
   end
 end

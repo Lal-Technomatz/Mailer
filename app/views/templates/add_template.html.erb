@@ -1,6 +1,6 @@
 <div class = "container-fluid" style = "width: 90%">
   <h1>Adding Template</h1>
-    <%= render "shared/form", user_temp: @template  %></br>
+    <%= render "shared/form", model_object: nil, form_action: template_add_template_path(@template) %></br>
     <%= link_to "Back to template", template_path(@template), class: 'btn btn-primary btn-lg' %>
   </br>
 </div>

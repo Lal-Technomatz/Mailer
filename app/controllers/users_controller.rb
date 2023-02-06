@@ -64,12 +64,25 @@ class UsersController < ApplicationController
 
   def send_multiple_mail
     data = params[:body]
-    subject=params[:subject]
+    subject = params[:subject]
     users = params[:emails]
+    if params[:file]
+      spreadsheets = Roo::Spreadsheet.open(params[:file])
+      spreadsheets.sheets.each do |spreadsheet_name|
+        spreadsheet = spreadsheets.sheet(spreadsheet_name)
+        header = spreadsheet.row(1)
+        (2..spreadsheet.last_row).each do |i|
+          row = Hash[[header, spreadsheet.row(i)].transpose]
+          user = row.to_hash.slice(*row.to_hash.keys)
+          users << [user["email"],user["name"] ]
+        end
+      end
+    end
     if users.present?
-      users.shift()
-      users.each do |email|
-        UserMailer.send_bulk_email(email, subject, data).deliver_now
+      users.compact_blank!
+      users.each do |user_data|
+        email, name = user_data
+        UserMailer.send_bulk_email(email, name, subject, data).deliver_later
       end
       redirect_to root_path
     else
@@ -78,7 +91,6 @@ class UsersController < ApplicationController
   end
 
   def import
-    # debugger
     User.import(params[:file])
     redirect_to root_path, notice: "Users Imported."
   end

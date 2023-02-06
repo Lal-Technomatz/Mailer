@@ -33,7 +33,7 @@
         <tr>
           <td class="col col-lg-2"><%= user.id%></td>
           <td class="col-md-auto"><%= user.name%></td>
-          <td class="col col-lg-2"><%= button_to "Destroy this user", @user, method: :delete, class: "btn rounded-pill btn-outline-primary"%></td>
+          <td class="col col-lg-2"><%= button_to "Destroy this user", user, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' }}, class: "btn rounded-pill btn-outline-primary"%></td>
           <td class="col col-lg-2"><%= link_to "Show this user", user, class: "btn rounded-pill btn-outline-success" %></td>
         </tr>
       <% end %>

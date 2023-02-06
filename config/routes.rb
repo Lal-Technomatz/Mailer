@@ -1,4 +1,6 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
   get 'items_imports/new'
   get 'items_imports/create'
   root "users#index"

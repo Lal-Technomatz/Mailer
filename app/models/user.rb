@@ -19,11 +19,12 @@ class User < ApplicationRecord
     if file.content_type == "text/csv"
       spreadsheet = Roo::CSV.new(file)
       header = spreadsheet.row(1)
-      spreadsheet.each do |row|
+      (2..spreadsheet.last_row).each do |row_num|
+        row = spreadsheet.row(row_num)
         if row[3] == "email"
           next
         else
-          User.create!(name: row[1], email: row[3])
+          User.create!(name: row[1], email: row[2])
         end
       end
     else
@@ -38,7 +39,7 @@ class User < ApplicationRecord
     end
   end
 
-  # def open_spreadsheet(file)
+  # def self.open_spreadsheet(file)
   #   case File.extname(file.original_filename)
   #   when ".csv" then Roo::CSV.new(file.path, packed: false, file_warning: :ignore)
   #   when ".xls" then Roo::Excel.new(file.path, packed: false, file_warning: :ignore)
